@@ -59,13 +59,15 @@ const CaptureData: StorefrontFunctionComponent = () => {
       })
 
   return (
-    
     <div>
-      <h1>Teste</h1>
-      {products.map((product: any) => {
-        product.ProductName
-      })}
+      {products.map((product) => (
+          <p>
+          {product.DetailUrl}</b>
+          {product.ImageUrl}
+          </p>
+      ))}
     </div>
+  
   )
 }
 
