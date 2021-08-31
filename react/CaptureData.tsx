@@ -26,39 +26,44 @@ const CaptureData: StorefrontFunctionComponent = () => {
       const sku = Object.values(response.data.data)
 
       if (response.data.data) {
-        Object.values(sku).map((key: any) => {
-          if (key !== []) {
-            // get product context
-            apiVtex.get(`/_v/productsId/${key}`).then((resp) => {
-              productsArray.push({
-                id: resp.data.id,
-                ProductName: resp.data.ProductName,
-                ProductDescription: resp.data.ProductDescription,
-                IsActive: resp.data.IsActive,
-                ImageUrl: resp.data.ImageUrl,
+        sku.map((keys: any) => {
+          keys.map((key: any)=>{
+            if (key !== undefined) {
+
+              // get product context
+              
+              apiVtex.get(`/_v/productsId/${key}`).then((resp) => {
+                setProducts([...products, 
+                {
+                  id: key,
+                  ProductName: resp.data.ProductName,
+                  ProductDescription: resp.data.ProductDescription,
+                  IsActive: resp.data.IsActive,
+                  ImageUrl: resp.data.ImageUrl,
+                  DetailUrl: resp.data.DetailUrl
+                }])
               })
-            })
           }
+          })
+
         })
         setProducts(productsArray)
       }
     }
-
+    
     getUrl()
-    console.log(products)
-    products.map((item) => console.log(item.ProductName))
   }, [])
 
-  // console.log(products)
-  // products.forEach((item) => console.log('teste'))
-  // products.map((product: any) => {
-  //   return console.log('product', product)
-  // })
+  products.map((product: any) => {
+        console.log(product)
+      })
 
   return (
+    
     <div>
+      <h1>Teste</h1>
       {products.map((product: any) => {
-        return product.ProductName
+        product.ProductName
       })}
     </div>
   )
